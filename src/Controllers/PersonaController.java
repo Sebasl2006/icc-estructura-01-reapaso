@@ -1,11 +1,13 @@
 package Controllers;
 
 import Models.Persona;
+import views.ViewConsole;
 
 /**
  * Controlador para manejar la lógica de operaciones sobre arrays de Persona.
  */
 public class PersonaController {
+    
     /**
      * Método para ordenar un arreglo de Persona por edad utilizando el algoritmo de
      * inserscion .
@@ -13,7 +15,19 @@ public class PersonaController {
      * @param personas Array de Persona a ordenar.
      */
     public void ordenarPorEdad(Persona[] personas) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        for(int i = 1; i < personas.length; i++) {
+            Persona actual = personas[i];
+            int j = i-1;
+            while(j>=0 && personas[j].getEdad() > actual.getEdad()) {
+                personas[j+1] = personas[j];
+                j--;
+            }
+            personas[j+1] = actual;
+
+
+        }
+
+        
     }
 
     /**
@@ -26,7 +40,19 @@ public class PersonaController {
      *         encuentra.
      */
     public Persona buscarPorEdad(Persona[] personas, int edad) {
-        throw new UnsupportedOperationException("Not implemented yet.");
+        int lower = 0;
+        int high = personas.length -1;
+        while (high >= lower) {
+            int central = (high + lower) / 2;
+            if ( personas[central].getEdad() == edad) return personas[central];
+            if (personas[central].getEdad() > edad) high = central -1;
+            else lower = central + 1;
+                
+            
+            
+        }
+        return null;
+        
 
     }
 }
